@@ -12,8 +12,15 @@ public class Student extends Person implements Evaluation
     private double average;
 
     private final List<Course> courses = new ArrayList<>();
+    
+    private  Map<Course,Integer> courseGrades = new HashMap<Course, Integer>();
 
-    private final Map<String, Course> approvedCourses = new HashMap<>();
+
+	public void setAverage(double average) {
+		this.average = average;
+	}
+
+	private final Map<String, Course> approvedCourses = new HashMap<>();
 
     public Student( String id, String name, String email, Date birthDate )
     {
@@ -52,10 +59,46 @@ public class Student extends Person implements Evaluation
     }
 
     // CHALLENGE IMPLEMENTATION: Read README.md to find instructions on how to solve. 
-    public List<Course> findPassedCourses( Course course )
+    public List<Course> findPassedCourses()
     {
         //TODO implement this method
+    	
+    		    	
+    	if(!approvedCourses.isEmpty()) {
+    		List<Course> passedcourse = new ArrayList<Course>();
+        	
+        	Set<Course> keys=courseGrades.keySet();
+        	
+        	for(Course key : keys) {
+        		
+        		if(courseGrades.get(key)>50) {
+        			//courses.add(approvedCourses.get(key));     // Method 1 
+        			courses.add(key);                          // For this purpose we set the key of course grade as object of course it will save time of searching 
+        		}    		
+        	}
+        	
+        	// Another method for Iterate
+//        	for(Map.Entry<Course,Integer> e : courseGrades.entrySet()) {       		
+//        		courses.add(e.getKey());
+//        		
+//        	}
+        	return courses;
+    	}  	
         return null;
+    }
+    
+    
+    public void setGrade(Course course,int grade) {
+    	
+    	if(approvedCourses.containsKey(course)) {
+    		
+    		int res = courseGrades.put(course, grade);
+    		
+    		if(res==1) System.out.println("Grade updated");
+    		else System.err.println("Grade is not updated");
+    		
+    	}
+    	else System.out.println("Course is not approved ...");
     }
 
     public boolean isAttendingCourse( String courseCode )
@@ -95,6 +138,15 @@ public class Student extends Person implements Evaluation
     	
         return null;
     }
+    public Map<Course, Integer> getCourseGrades() {
+		return courseGrades;
+	}
+
+	
+
+	public List<Course> getCourses() {
+		return courses;
+	}
 
     @Override
     public String toString()
