@@ -5,6 +5,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 
 public class Student extends Person implements Evaluation
 {
@@ -22,6 +23,18 @@ public class Student extends Person implements Evaluation
     public void enrollToCourse( Course course )
     {
         //TODO implement this method
+    	
+    	if(!approvedCourses.containsKey(course.getCode())) {
+    		
+    		
+    		//approvedCourses.
+    		System.out.println("Perticullary couse is not available in the has map so i am makin new id whith"+course.getCode());
+    		approvedCourses.put(course.getCode(),course);
+    		
+    	}
+    	else System.out.println("All ready course is enrolled");
+	
+    	
     }
 
     public void registerApprovedCourse( Course course )
@@ -32,6 +45,9 @@ public class Student extends Person implements Evaluation
     public boolean isCourseApproved( String courseCode )
     {
         //TODO implement this method
+    	if(approvedCourses.containsKey(courseCode)) {
+    		return true;
+    	}
         return false;
     }
 
@@ -45,6 +61,11 @@ public class Student extends Person implements Evaluation
     public boolean isAttendingCourse( String courseCode )
     {
         //TODO implement this method
+    	
+    	if(approvedCourses.containsKey(courseCode)) {
+    		return true;
+    	}
+    	
         return false;
     }
 
@@ -58,6 +79,20 @@ public class Student extends Person implements Evaluation
     public List<Course> getApprovedCourses()
     {
         //TODO implement this method
+    	
+    	if(!approvedCourses.isEmpty()) {
+    		//Set<String> key = approvedCourses.keySet();
+    		
+    		for (Map.Entry<String, Course> entry : approvedCourses.entrySet()) {
+				String key = entry.getKey();
+				Course val = entry.getValue();
+				courses.add(val);
+				
+			}
+    		return courses;
+    		
+    	}
+    	
         return null;
     }
 

@@ -23,7 +23,16 @@ public class Main
             switch ( option )
             {
                 case 1:
-                    registerStudent( studentService, scanner );
+                	
+                    try{
+                    	registerStudent( studentService, scanner );
+                    	
+                    }
+                    catch (Exception e) {
+						// TODO: handle exception
+                    	System.err.println("Please Enter Valid input");
+					}
+                    
                     break;
                 case 2:
                     findStudent( studentService, scanner );
@@ -84,6 +93,27 @@ public class Main
 
     private static void gradeStudent( StudentService studentService, Scanner scanner )
     {
+    	
+    	System.out.println("Please Enter student Id :");
+    	String studentid = scanner.next();
+    	Student student=studentService.findStudent(studentid);
+    	
+    	if(!student.equals(null)) {
+    		if(student.getAverage()>90) {
+        		System.out.println("Student has A+ grade");
+        	}
+        	else if(student.getAverage()>60) {
+        		System.out.println("Student has B grade :");
+        	}
+        	else if(student.getAverage()>40)
+        	{
+        		System.out.println("Student has c grade");
+        	}
+        	else if(student.getAverage()>0) {
+        		System.out.println("Student is fail");
+        	}
+    	}
+    	else System.out.println("I dont find student please enter valid student id");
 
     }
 
