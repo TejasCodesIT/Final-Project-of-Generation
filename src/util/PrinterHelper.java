@@ -43,7 +43,11 @@ public class PrinterHelper
         String email = scanner.next();
        
         //TODO validate date format and catch exception to avoid crash
+        
+        
         Date birthDate =null;
+        
+        
        while(true) {
     	   try {
           	 System.out.println( "| Enter student birth date(mm/dd/yyyy)|" );

@@ -49,9 +49,11 @@ public class Main
                 case 6:
                     showCoursesSummary( courseService, scanner );
                     break;
+                case 7:
+                	
             }
         }
-        while ( option != 7 );
+        while ( option != 8 );
     }
 
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
@@ -100,18 +102,19 @@ public class Main
     	
     	if(!student.equals(null)) {
     		if(student.getAverage()>90) {
-        		System.out.println("Student has A+ grade");
+        		System.out.println("Student has A grade");
         	}
         	else if(student.getAverage()>60) {
         		System.out.println("Student has B grade :");
         	}
         	else if(student.getAverage()>40)
         	{
-        		System.out.println("Student has c grade");
+        		System.out.println("Student has C grade");
         	}
         	else if(student.getAverage()>0) {
         		System.out.println("Student is fail");
         	}
+    		
     	}
     	else System.out.println("I dont find student please enter valid student id");
 
@@ -139,4 +142,26 @@ public class Main
         Student student = PrinterHelper.createStudentMenu( scanner );
         studentService.subscribeStudent( student );
     }
+    
+    public static void calculateAverageGrade(Scanner scanner ,CourseService courseService,StudentService studentService) { 
+    	  
+    	
+    	
+    	 System.out.println("Enter the course code:");
+    	    String courseCode = scanner.nextLine();
+    	    Course course = courseService.getCourse(courseCode);
+    	    if (course != null) {
+    	        double averageGrade = studentService.calculateAverageGradeForCourse(course);
+    	        System.out.println("The average grade for course " + courseCode + " is: " + averageGrade);
+    	    } else {
+    	        System.out.println("Course not found.");
+    	    }
+    	
+    	
+    }
+    
+    
+    
+    
+    
 }

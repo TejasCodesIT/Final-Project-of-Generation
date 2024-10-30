@@ -14,13 +14,36 @@ public class Student extends Person implements Evaluation
     private final List<Course> courses = new ArrayList<>();
     
     private  Map<Course,Integer> courseGrades = new HashMap<Course, Integer>();
+    
+    private final Map<String, Course> approvedCourses = new HashMap<>();
 
 
 	public void setAverage(double average) {
 		this.average = average;
 	}
+	
+	public int getCourseGrade(Course course) {
+		
+		return courseGrades.get(course);
+		
+	}
+	
+	public void calculateAverage() {
+		double totalgrade= 0 ;
+		int courseCount = 0 ;
+		
+		for (Map.Entry<Course, Integer> entry : courseGrades.entrySet()) {
+			
+			Integer val = entry.getValue();
+			totalgrade+=val;
+			courseCount++;
+			
+		}
+	        setAverage(totalgrade/courseCount);
+		
+	}
 
-	private final Map<String, Course> approvedCourses = new HashMap<>();
+	
 
     public Student( String id, String name, String email, Date birthDate )
     {
@@ -138,9 +161,7 @@ public class Student extends Person implements Evaluation
     	
         return null;
     }
-    public Map<Course, Integer> getCourseGrades() {
-		return courseGrades;
-	}
+   
 
 	
 
