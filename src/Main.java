@@ -8,7 +8,7 @@ import model.Student;
 import service.CourseService;
 import service.StudentService;
 import util.PrinterHelper;
-
+//Changes
 public class Main
 {
 
@@ -100,35 +100,39 @@ public class Main
         studentService.showSummary();
     }
 
-    private static void gradeStudent( StudentService studentService, Scanner scanner )
+    private static void gradeStudent( StudentService studentService, Scanner scanner ) throws ParseException
     {
     	
     	System.out.println("Please Enter student Id :");
     	String studentid = scanner.next();
-    	Student student=studentService.findStudent(studentid);
+    	try {
+    		Student student=studentService.findStudent(studentid);
+        	
+        	if(!student.equals(null)) { /// student  = null ;--- > stuent.equals(null) -- > true .  -- false
+        	
+        		if(student.getAverage()>=90) {
+            		System.out.println("Student has A grade");
+            	}
+            	else if(student.getAverage()>=60) {
+            		System.out.println("Student has B grade :");
+            	}
+            	else if(student.getAverage()>=40)
+            	{
+            		System.out.println("Student has C grade");
+            	}
+            	else if(student.getAverage()>0) {
+            		System.out.println("Student is fail");
+            	}
+        	}	
+		} catch (Exception e) {
+			System.err.println("Please Register Student first");
+			 registerStudent(  studentService, scanner );
+		}
     	
-    	if(!student.equals(null)) { /// student  = null ;--- > stuent.equals(null) -- > true .  -- false
-    	
-    		if(student.getAverage()>=90) {
-        		System.out.println("Student has A grade");
-        	}
-        	else if(student.getAverage()>=60) {
-        		System.out.println("Student has B grade :");
-        	}
-        	else if(student.getAverage()>=40)
-        	{
-        		System.out.println("Student has C grade");
-        	}
-        	else if(student.getAverage()>0) {
-        		System.out.println("Student is fail");
-        	}
-    		
-    	}
-    	else System.out.println("I dont find student please enter valid student id");
 
     }
 
-    private static void findStudent( StudentService studentService, Scanner scanner )
+    private static void findStudent( StudentService studentService, Scanner scanner ) 
     {
         System.out.println( "Enter student ID: " );
         String studentId = scanner.next();
@@ -141,6 +145,7 @@ public class Main
         else
         {
             System.out.println( "Student with Id = " + studentId + " not found" );
+           
         }
     }
 
