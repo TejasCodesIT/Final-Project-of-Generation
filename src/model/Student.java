@@ -63,12 +63,12 @@ public class Student extends Person implements Evaluation
     		
     		
     		//approvedCourses.
-    		System.out.println("Perticullary couse is not available in the has map so i am makin new id whith"+course.getCode());
+    		System.out.println("This course is not taken by student so i am making enroll to student : "+course.getCode());
     		approvedCourses.put(course.getCode(),course);
     		
     		
     	}
-    	else System.out.println("All ready course is enrolled");
+    	else System.out.println("Allready course is enrolled");
 	
     	
     }
@@ -101,7 +101,7 @@ public class Student extends Person implements Evaluation
         	for(Course key : keys) {
         		
         		if(courseGrades.get(key)>50) {
-        			//courses.add(approvedCourses.get(key));     // Method 1 
+        														//courses.add(approvedCourses.get(key));     // Method 1 
         			courses.add(key);                          // For this purpose we set the key of course grade as object of course it will save time of searching 
         		}    		
         	}

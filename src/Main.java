@@ -1,4 +1,6 @@
 import java.text.ParseException;
+import java.util.Iterator;
+import java.util.List;
 import java.util.Scanner;
 
 import model.Course;
@@ -19,6 +21,7 @@ public class Main
         do
         {
             PrinterHelper.showMainMenu();
+            
             option = scanner.nextInt();
             switch ( option )
             {
@@ -52,9 +55,12 @@ public class Main
                 case 7:
                 	setGradeOfStudent(scanner,studentService);
                 	
+                case 8:
+                	findPassedCourses(scanner, studentService);
+                	
             }
         }
-        while ( option != 8 );
+        while ( option != 9 );
     }
 
     private static void enrollStudentToCourse( StudentService studentService, CourseService courseService,
@@ -101,15 +107,15 @@ public class Main
     	String studentid = scanner.next();
     	Student student=studentService.findStudent(studentid);
     	
-    	if(!student.equals(null)) {
+    	if(!student.equals(null)) { /// student  = null ;--- > stuent.equals(null) -- > true .  -- false
     	
-    		if(student.getAverage()>90) {
+    		if(student.getAverage()>=90) {
         		System.out.println("Student has A grade");
         	}
-        	else if(student.getAverage()>60) {
+        	else if(student.getAverage()>=60) {
         		System.out.println("Student has B grade :");
         	}
-        	else if(student.getAverage()>40)
+        	else if(student.getAverage()>=40)
         	{
         		System.out.println("Student has C grade");
         	}
@@ -170,14 +176,39 @@ public class Main
     	
     	System.out.println("Please Enter course ");
     	String courseCode = scanner.next();
-    	 
-    	
-    	
     	studentservice.setGradeOfStudent(sid,courseCode,scanner);
     	
     	
     	
     }
+    
+    private static void findPassedCourses(Scanner sc,StudentService service) {
+		
+    	System.out.println("Please Enter Student id");
+    	String studentid = sc.next();
+    	Student student = service.findStudent(studentid);
+    	
+    	if(!student.equals(null)) {
+    		
+    		
+    		List<Course> list=student.findPassedCourses();
+    		
+    		for(Course c : list) {
+    			
+    			System.out.println(c);
+    			
+    		}
+    		
+    	}
+    	else System.out.println("Did not find Student...");
+    	
+    	
+    	
+    	
+    	
+    	
+
+	}
     
     
     
