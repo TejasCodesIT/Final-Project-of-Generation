@@ -7,6 +7,8 @@ import java.util.List;
 import java.util.Map;
 import java.util.Set;
 
+import service.CourseService;
+
 public class Student extends Person implements Evaluation
 {
     private double average;
@@ -48,6 +50,9 @@ public class Student extends Person implements Evaluation
     public Student( String id, String name, String email, Date birthDate )
     {
         super( id, name, email, birthDate );
+        
+        
+        
     }
 
     public void enrollToCourse( Course course )
@@ -60,6 +65,7 @@ public class Student extends Person implements Evaluation
     		//approvedCourses.
     		System.out.println("Perticullary couse is not available in the has map so i am makin new id whith"+course.getCode());
     		approvedCourses.put(course.getCode(),course);
+    		
     		
     	}
     	else System.out.println("All ready course is enrolled");
@@ -111,17 +117,22 @@ public class Student extends Person implements Evaluation
     }
     
     
-    public void setGrade(Course course,int grade) {
+    public void setGrade(String courseCode,int grade) {
     	
-    	if(approvedCourses.containsKey(course)) {
-    		
-    		int res = courseGrades.put(course, grade);
-    		
-    		if(res==1) System.out.println("Grade updated");
-    		else System.err.println("Grade is not updated");
-    		
+    	
+    	if (isCourseApproved(courseCode)) {
+    	    Course course = approvedCourses.get(courseCode);
+    	     courseGrades.put(course, grade);
+    	     
+    	        System.out.println("Grade updated");
+    	    System.out.println(courseGrades.get(course));
+    	    
+    	} else {
+    	    System.err.println("Course not approved.");
     	}
-    	else System.out.println("Course is not approved ...");
+
+    	
+    	
     }
 
     public boolean isAttendingCourse( String courseCode )
@@ -138,6 +149,7 @@ public class Student extends Person implements Evaluation
     @Override
     public double getAverage()
     {
+    	calculateAverage();
         return average;
     }
 

@@ -50,6 +50,7 @@ public class Main
                     showCoursesSummary( courseService, scanner );
                     break;
                 case 7:
+                	setGradeOfStudent(scanner,studentService);
                 	
             }
         }
@@ -76,7 +77,7 @@ public class Main
             System.out.println( "Invalid Course ID" );
             return;
         }
-        System.out.println( course );
+      //  System.out.println( course );
         courseService.enrollStudent( courseId, student );
         studentService.enrollToCourse( studentId, course );
         System.out.println( "Student with ID: " + studentId + " enrolled successfully to " + courseId );
@@ -101,6 +102,7 @@ public class Main
     	Student student=studentService.findStudent(studentid);
     	
     	if(!student.equals(null)) {
+    	
     		if(student.getAverage()>90) {
         		System.out.println("Student has A grade");
         	}
@@ -156,6 +158,23 @@ public class Main
     	    } else {
     	        System.out.println("Course not found.");
     	    }
+    	
+    	
+    }
+    
+    public static void setGradeOfStudent(Scanner scanner , StudentService studentservice) {
+    	
+    	
+    	System.out.println("Please Enter student id");
+    	String sid = scanner.next();
+    	
+    	System.out.println("Please Enter course ");
+    	String courseCode = scanner.next();
+    	 
+    	
+    	
+    	studentservice.setGradeOfStudent(sid,courseCode,scanner);
+    	
     	
     	
     }

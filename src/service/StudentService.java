@@ -2,6 +2,7 @@ package service;
 
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Scanner;
 import java.util.Set;
 
 import model.Course;
@@ -10,8 +11,17 @@ import model.Student;
 public class StudentService
 {
     private final Map<String, Student> students = new HashMap<>();
+    
+    
+  
 
-    public void subscribeStudent( Student student )
+    public StudentService() {
+		super();
+		// TODO Auto-generated constructor stub
+		
+	}
+
+	public void subscribeStudent( Student student )
     {
         students.put( student.getId(), student );
     }
@@ -85,6 +95,20 @@ public class StudentService
     	return 0.0;
     	
     }
+   public void  setGradeOfStudent(String sid ,String courseCode, Scanner sc){        
+		          
+	             if(students.get(sid)!=null) {
+		           System.out.println("Please Enter grade");
+		           int grade = sc.nextInt();
+		           students.get(sid).setGrade(courseCode, grade);
+	             }
+	             else System.out.println("Student is not register...");
+		       
+	   
+	   
+	   
+    }
+    
 
 
 }
