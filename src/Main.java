@@ -8,7 +8,7 @@ import model.Student;
 import service.CourseService;
 import service.StudentService;
 import util.PrinterHelper;
-//Changes from tejas eclipse
+//Changes for Kshitij
 public class Main
 {
 
